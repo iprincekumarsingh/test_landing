@@ -27,14 +27,9 @@ const Hero = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [successmodal, successSetOpen] = React.useState(false);
 
-  const [state, setState] = useState({
-    profession: "",
-    email: "",
-  });
-  const handlesubmit = (event) => {
-    event.preventDefault();
-  };
-  const email = state.email;
+  const [email, setEmail] = useState("");
+  const [profession, setProfession] = useState("");
+  const [msg, setMsg] = useState("");
 
   const openModal = () => {
     setIsOpen(true);
@@ -46,16 +41,43 @@ const Hero = () => {
   const successform = () => {
     successSetOpen(true);
   };
+  const handleSubmit = async () => {
+    console.log(email);
+    console.log(profession);
 
-  const handleSubmit = (event) => {
-    // event.preventDefault()
-    console.log("Word");
+    const options = {
+      method: "POST",
+      Headers: "Access-Control-Allow-Origin’:’*’",
+      body: new URLSearchParams({
+        email: email,
+        proffession: profession,
+      }),
+    };
+    await fetch("https://api.stuneckt.com/api/saveform", options)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.success == 1) {
+          closeModal();
+          successform();
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    if (profession == "Student") {
+      setMsg("Interested to join our Valuable profile student program , ");
+    } else if (profession == "Program") {
+      setMsg(
+        "Get more visiblity by making your students join our most valueable profile program , "
+      );
+    } else {
+      setMsg(
+        "I Know someone who can join our valueable profile program, click here to know more. "
+      );
+    }
   };
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setState({ ...state, [name]: value });
-  };
+  // alert(state.email)
 
   return (
     <main>
@@ -73,6 +95,7 @@ const Hero = () => {
           <p className="Formparagraph">Thank you ! We will keep you posted</p>
         </div>
         <div className="always">
+        {msg}
           <a
             className="linkcolor"
             href="https://docs.google.com/forms/d/1f_LDsRHmKexnPqRmqyTLuCHP4ZN7gxqEloFtntgeprE/viewform?ts=639708ae&edit_requested=true"
@@ -101,7 +124,7 @@ const Hero = () => {
         <form onSubmit={handleSubmit} className="fff" action="#">
           <div className="input-field">
             <label htmlFor="">Occupation</label>
-            <select>
+            <select onChange={(e) => setProfession(e.target.value)}>
               <option value="">Select Occupation</option>
               <option value="Student">Student</option>
               <option value="Educator">Educator</option>
@@ -112,13 +135,13 @@ const Hero = () => {
           <div className="input-field">
             <label htmlFor="">Email</label>
             <input
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="hello@gmail.com"
               id=""
             />
           </div>
         </form>
-        <button className="btn-submit" type="submit">
+        <button onClick={handleSubmit} className="btn-submit" type="submit">
           Submit
         </button>
         {/* <div className="btn-submit" > */}

@@ -12,17 +12,17 @@ const Footer = () => {
         <ul className="menu simple">
          
           <li>
-            <a href="https://www.instagram.com/?hl=en">
+            <a href="https://www.instagram.com/stuneckt/">
               <i className="fa fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href="https://www.pinterest.com/">
+            <a href="https://www.linkedin.com/company/stuneckt/">
               <i className="fa fa-linkedin" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/?lang=en">
+            <a href="https://twitter.com/stuneckt">
               <i className="fa fa-twitter" aria-hidden="true"></i>
             </a>
           </li>
