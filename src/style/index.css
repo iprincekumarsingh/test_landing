@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Raleway&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background:linear-gradient(65deg,rgba(0, 0, 255, 0.075),pink); */
+  font-family: Raleway;
+  /* background-image: url("../assests/img/formbg.png"); */
+  /* background-repeat: no-repeat; */
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+}
